@@ -34,7 +34,7 @@ function postcodeChangeEvent() {
  * @returns {boolean}
  */
 function toggleRelaisMap(address, codePostal, city, e) {
-    var valueChecked = $("#js-delivery .custom-radio > input[type=radio]:checked").val();
+    var valueChecked = $("#js-delivery .custom-radio > .check-wrap > input[type=radio]:checked").val();
     if (valueChecked !== undefined) {
         valueChecked = valueChecked.slice(0, -1);
     }
@@ -47,6 +47,7 @@ function toggleRelaisMap(address, codePostal, city, e) {
     var postCodeControls = $('#chrono_postcode_controls');
     var chronorelaisContainer = $('#chronorelais_container');
 
+
     if (valueChecked === CHRONORELAIS_AMBIENT_ID || carrierChecked === CHRONORELAIS_AMBIENT_ID_INT ||
         valueChecked === CHRONORELAIS_ID || carrierChecked === CHRONORELAIS_ID_INT ||
         valueChecked === RELAISEUROPE_ID || carrierChecked === RELAISEUROPE_ID_INT ||
@@ -55,7 +56,7 @@ function toggleRelaisMap(address, codePostal, city, e) {
         if (typeof e !== "undefined") {
             e.stopPropagation();
         }
-
+        
         // Show Chronorelais controls
         chronorelaisContainer.show();
         postCodeControls.show();
@@ -337,6 +338,7 @@ function cleanContainers() {
 }
 
 $(function () {
+
     // Return if variable are undefined
     if (typeof CHRONORELAIS_AMBIENT_ID === 'undefined' && typeof CHRONORELAIS_ID === 'undefined' &&
         typeof RELAISEUROPE_ID === 'undefined' && typeof RELAISDOM_ID === 'undefined' &&
@@ -364,7 +366,7 @@ $(function () {
     toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);
 
     // Listener for selection of the ChronoRelais carrier radio button
-    body.on('click', '#js-delivery .custom-radio > input[type=radio], input[name=id_carrier]', function (e) {
+    body.on('click', '#js-delivery .custom-radio > .check-wrap > input[type=radio], input[name=id_carrier]', function (e) {
         cleanContainers();
         toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city, e);
 
